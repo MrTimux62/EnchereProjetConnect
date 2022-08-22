@@ -23,7 +23,7 @@
 		<span> <img alt="profil"
 			src="${ pageContext.request.contextPath }/resources/utilisateur.png">
 			<a href="${ pageContext.request.contextPath }/ctrl/profil/${sessionScope.session_user}">Mon
-				profil</a></span>
+				profiltest</a></span>
 	</c:if>
 	<c:if
 		test="${sessionScope.session_user == null || sessionScope.session_user == '-1'}">
