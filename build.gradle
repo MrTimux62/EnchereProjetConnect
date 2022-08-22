@@ -1,0 +1,41 @@
+
+plugins {
+
+	id 'java'
+	id 'war'
+	id 'eclipse-wtp'
+
+}
+
+sourceCompatibility = 11
+targetCompatibility = 11
+
+eclipse.wtp.facet {
+	facet name: 'jst.web', version: '4.0'
+	facet name: 'jpt.jpa', version: '2.2'
+}
+
+repositories {
+
+	mavenCentral()
+
+}
+
+dependencies {
+
+	compileOnly group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
+
+	runtimeOnly group: 'org.glassfish.web', name: 'javax.servlet.jsp.jstl', version: '1.2.5'
+
+	implementation group: 'org.springframework', name: 'spring-webmvc', version: '5.3.22'
+//	implementation group: 'org.springframework', name: 'spring-context', version: '5.3.22'
+	implementation group: 'org.springframework', name: 'spring-orm', version: '5.3.22'
+	implementation group: 'org.springframework.data', name: 'spring-data-jpa', version: '2.7.2'
+
+	runtimeOnly group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.9.0'
+
+	runtimeOnly group: 'org.eclipse.persistence', name: 'eclipselink', version: '2.7.11'
+
+	runtimeOnly group: 'mysql', name: 'mysql-connector-java', version: '8.0.30'
+
+}
