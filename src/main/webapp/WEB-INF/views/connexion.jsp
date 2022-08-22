@@ -22,12 +22,18 @@
 	 <label for="souvenir">Se souvenir de moi</label>
 	 <a>Mot de passe oublié</a>
 </form>
+<p style="color: red">
+<c:forEach var="entry" items="${incorrect}">
+${entry}
+</c:forEach>
+</p>
+<a href="${ pageContext.request.contextPath }/ctrl/inscription">Crée un compte</a>
 
 </main>
 
 
 
-<a href="${ pageContext.request.contextPath }/ctrl/inscription">Crée un compte</a>
+
 
 <script type="text/javascript" src="${ pageContext.request.contextPath }/js/main.js"></script>
 </body>

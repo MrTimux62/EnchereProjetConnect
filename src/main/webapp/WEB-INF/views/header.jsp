@@ -3,13 +3,13 @@
 
 <header>
 	<h2>ENI-Enchères</h2>
-	<c:if test="${sessionScope.session_user != null}">
+	<c:if test="${sessionScope.session_user != null && sessionScope.session_user != '-1'}">
 		<span><img alt="accueil"
 			src="${ pageContext.request.contextPath }/resources/accueil.png">
 			<a href="${ pageContext.request.contextPath }/ctrl/list_enchere">Accueil</a>
 		</span>
 	</c:if>
-	<c:if test="${sessionScope.session_user == null}">
+	<c:if test="${sessionScope.session_user == null || sessionScope.session_user == '-1'}">
 		<span><img alt="accueil"
 			src="${ pageContext.request.contextPath }/resources/accueil.png">
 			<a href="${ pageContext.request.contextPath }">Accueil</a> </span>
@@ -22,7 +22,7 @@
 		test="${sessionScope.session_user != null && sessionScope.session_user != '-1'}">
 		<span> <img alt="profil"
 			src="${ pageContext.request.contextPath }/resources/utilisateur.png">
-			<a href="${ pageContext.request.contextPath }/ctrl/profil">Mon
+			<a href="${ pageContext.request.contextPath }/ctrl/profil/${sessionScope.session_user}">Mon
 				profil</a></span>
 	</c:if>
 	<c:if

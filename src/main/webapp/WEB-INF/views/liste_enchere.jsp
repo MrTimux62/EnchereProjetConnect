@@ -12,8 +12,6 @@
 
 <h1>Liste Enchères Avec Connexion</h1>
 
-<a href="${ pageContext.request.contextPath }/ctrl/utilisateur/connexion">S'inscrire - Se connecter</a>
-
 
 <script type="text/javascript" src="${ pageContext.request.contextPath }/js/main.js"></script>
 </body>
