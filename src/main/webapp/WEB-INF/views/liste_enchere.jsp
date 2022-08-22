@@ -8,9 +8,11 @@
 </head>
 <body>
 
-<h1>Liste Enchères Sans Connexion</h1>
+<jsp:include page="header.jsp" />
 
-<a href="${ pageContext.request.contextPath }/ctrl/connexion">S'inscrire - Se connecter</a>
+<h1>Liste Enchères Avec Connexion</h1>
+
+<a href="${ pageContext.request.contextPath }/ctrl/utilisateur/connexion">S'inscrire - Se connecter</a>
 
 
 <script type="text/javascript" src="${ pageContext.request.contextPath }/js/main.js"></script>

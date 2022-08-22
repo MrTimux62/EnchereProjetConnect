@@ -2,9 +2,7 @@
 <persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.2"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
 	<persistence-unit name="EncherePU">
-
-		<class>fr.eni.spring.bean.Address</class>
-		<class>fr.eni.spring.bean.Person</class>
+		<class>fr.eni.spring.bean.Utilisateur</class>
 
 		<properties>
 

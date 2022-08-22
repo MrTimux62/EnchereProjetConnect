@@ -8,10 +8,7 @@
 </head>
 <body>
 
-<h1>Liste Enchères Sans Connexion</h1>
-
-<a href="${ pageContext.request.contextPath }/ctrl/connexion">S'inscrire - Se connecter</a>
-
+<h1>Inscription</h1>
 
 <script type="text/javascript" src="${ pageContext.request.contextPath }/js/main.js"></script>
 </body>
