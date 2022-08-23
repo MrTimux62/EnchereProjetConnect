@@ -1,9 +1,12 @@
 package fr.eni.spring.bean;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Utilisateur {
@@ -18,10 +21,20 @@ public class Utilisateur {
 	private String email;
 	private String telephone;
 	private String rue;
-	private int codePostal;
+	private String codePostal;
 	private String ville;
 	private String motDePasse;
 	private int credit;
+	
+	@OneToMany
+	private List<ArticleVendu> achete;
+	
+	@OneToMany
+	private List<ArticleVendu> vend;
+	
+	@OneToMany
+	private List<Enchere> encherit;
+	
 	private boolean administrateur = false;
 	private boolean disabled = false;
 	
@@ -84,11 +97,11 @@ public class Utilisateur {
 		this.rue = rue;
 	}
 
-	public int getCodePostal() {
+	public String getCodePostal() {
 		return codePostal;
 	}
 
-	public void setCodePostal(int codePostal) {
+	public void setCodePostal(String codePostal) {
 		this.codePostal = codePostal;
 	}
 
@@ -130,6 +143,30 @@ public class Utilisateur {
 
 	public void setDisabled(boolean disabled) {
 		this.disabled = disabled;
+	}
+
+	public List<ArticleVendu> getAchete() {
+		return achete;
+	}
+
+	public void setAchete(List<ArticleVendu> achete) {
+		this.achete = achete;
+	}
+
+	public List<ArticleVendu> getVend() {
+		return vend;
+	}
+
+	public void setVend(List<ArticleVendu> vend) {
+		this.vend = vend;
+	}
+
+	public List<Enchere> getEncherit() {
+		return encherit;
+	}
+
+	public void setEncherit(List<Enchere> encherit) {
+		this.encherit = encherit;
 	}
 	
 }

@@ -23,9 +23,7 @@
 	 <a>Mot de passe oublié</a>
 </form>
 <p style="color: red">
-<c:forEach var="entry" items="${incorrect}">
-${entry}
-</c:forEach>
+${incorrect}
 </p>
 <a href="${ pageContext.request.contextPath }/ctrl/inscription">Crée un compte</a>
 

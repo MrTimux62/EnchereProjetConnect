@@ -93,23 +93,65 @@ public class UtilisateurController {
 	}
 	
 	@PostMapping("/inscription")
-	private ModelAndView insert(Utilisateur u) {
-		
-		u.setMotDePasse(passwordEncryptor.encryptPassword(u.getMotDePasse()));
+	private ModelAndView insert(Utilisateur u, String motDePasse2) {
 
-		utilisateurDAO.save(u);
-		
-		List<Utilisateur> liste_utilisateur = utilisateurDAO.findAll();
 		ModelAndView modelandview = new ModelAndView();
+		modelandview.setViewName("inscription");
 		
-		modelandview.setViewName("liste_enchere");
-		
-		for (Utilisateur utilisateur : liste_utilisateur) {
-			if (utilisateur.getPseudo().equals(u.getPseudo()) && utilisateur.getMotDePasse().equals(u.getMotDePasse())) {
-				modelandview.addObject("session_user", utilisateur.getNoUtilisateur());
+		if (u.getMotDePasse().isEmpty()) {
+			modelandview.addObject("incorrect", "Mot de passe vide");
+		} else if (!u.getMotDePasse().equals(motDePasse2)) {
+			modelandview.addObject("incorrect", "Les mot de passe ne correspondent pas");
+		} else {
+			
+			boolean same_pseudo = false;
+			
+			List<Utilisateur> list_utilisateur = utilisateurDAO.findAll();
+			
+			for (Utilisateur utilisateur : list_utilisateur) {
+				if (utilisateur.getPseudo().equals(u.getPseudo())) {
+					same_pseudo = true;
+				}
 			}
+			
+			if (same_pseudo) {
+				modelandview.addObject("incorrect", "Pseudo déjà utilisé");
+			} else {
+				u.setMotDePasse(passwordEncryptor.encryptPassword(u.getMotDePasse()));
+
+				utilisateurDAO.save(u);
+				
+				List<Utilisateur> liste_utilisateur = utilisateurDAO.findAll();
+				
+				modelandview.setViewName("liste_enchere");
+				
+				for (Utilisateur utilisateur : liste_utilisateur) {
+					if (utilisateur.getPseudo().equals(u.getPseudo()) && utilisateur.getMotDePasse().equals(u.getMotDePasse())) {
+						modelandview.addObject("session_user", utilisateur.getNoUtilisateur());
+					}
+				}
+			}
+			
 		}
 
+		return modelandview;
+	}
+	
+	@PostMapping("/delete")
+	private ModelAndView delete_utilisateur(int id, String motdepasse) {
+		ModelAndView modelandview = new ModelAndView();
+		
+		Utilisateur utilisateur = utilisateurDAO.getReferenceById(id);
+		
+		if (passwordEncryptor.checkPassword(motdepasse, utilisateur.getMotDePasse())) {
+			utilisateurDAO.deleteById(id);
+			modelandview.setViewName("connexion");
+			modelandview.addObject("session_user", "-1");
+		} else {
+			modelandview.setViewName("profil");
+			modelandview.addObject("incorrect", "Mot de passe ou utilisateur incorrect");
+		}
+		
 		return modelandview;
 	}
 

@@ -62,6 +62,17 @@
 			href="${ pageContext.request.contextPath }/ctrl/deconnecter">Se
 			déconnecter</a>
 
+		<form method="post" action="${ pageContext.request.contextPath }/ctrl/delete">
+			<input type="hidden" name="id" value="${sessionScope.session_user}">
+			<input type="password" name="motdepasse" placeholder="Confirmation mot de passe">
+			<input type="submit" value="Supprimer">
+		</form>
+		<p style="color: red">
+			${incorrect}
+		</p>
+		<a href="">Supprimer son compte</a>
+
+
 	</main>
 
 	<script type="text/javascript"

@@ -3,6 +3,10 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
 	<persistence-unit name="EncherePU">
 		<class>fr.eni.spring.bean.Utilisateur</class>
+		<class>fr.eni.spring.bean.Categorie</class>
+		<class>fr.eni.spring.bean.ArticleVendu</class>
+		<class>fr.eni.spring.bean.Enchere</class>
+		<class>fr.eni.spring.bean.Retrait</class>
 
 		<properties>
 
