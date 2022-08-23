@@ -25,8 +25,7 @@
 		<form method="post"
 			action="${ pageContext.request.contextPath }/ctrl/edit_profil/${sessionScope.session_user}">
 
-			<input type="hidden" name="noUtilisateur"
-				value="${sessionScope.session_user}">
+			<input type="hidden" name="noUtilisateur" value="${sessionScope.session_user}">
 				 <input type="text" name="prenom" placeholder="Prénom" value="${ u.prenom }"> 
 				<input type="text" name="telephone" placeholder="Téléphone" value="${ u.telephone }"> 
 				<input type="text" name="codePostal" placeholder="Code Postal" value="${ u.codePostal }"> 

@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.context.annotation.SessionScope;
+import org.springframework.web.method.annotation.SessionAttributesHandler;
 import org.springframework.web.servlet.ModelAndView;
 
 import fr.eni.spring.bean.Utilisateur;
@@ -45,12 +48,9 @@ public class UtilisateurController {
 	}
 
 	@GetMapping("/deconnecter")
-	private ModelAndView deconnexion() {
-
-		ModelAndView modelandview = new ModelAndView();
-		modelandview.setViewName("connexion");
-		modelandview.addObject("session_user", "-1");
-		return modelandview;
+	private ModelAndView deconnexion(SessionStatus status) {
+		status.setComplete();
+        return new ModelAndView("connexion");
 	}
 
 	@GetMapping("/nouvelle_vente")
@@ -79,6 +79,17 @@ public class UtilisateurController {
 		}
 
 		return new ModelAndView("profil");
+	}
+	
+	@GetMapping("/admin")
+	private ModelAndView admin_index() {
+
+		return new ModelAndView("admin_index");
+	}
+	
+	@PostMapping("/profil")
+	private ModelAndView page_profil_noname(Utilisateur u) {
+		return new ModelAndView("profil", "u", u);
 	}
 	
 	@GetMapping("/edit_profil/{id:\\d+}")
@@ -151,22 +162,26 @@ public class UtilisateurController {
 	}
 	
 	@PostMapping("/delete")
-	private ModelAndView delete_utilisateur(int id, String motdepasse) {
+	private ModelAndView delete_utilisateur(int id, String motdepasse, SessionStatus status) {
 		ModelAndView modelandview = new ModelAndView();
 		
 		Utilisateur utilisateur = utilisateurDAO.getReferenceById(id);
 		
 		if (passwordEncryptor.checkPassword(motdepasse, utilisateur.getMotDePasse())) {
 			utilisateurDAO.deleteById(id);
-			modelandview.setViewName("connexion");
-			modelandview.addObject("session_user", "-1");
+			//modelandview.setViewName("connexion");
+			//modelandview.addObject("session_user", "-1");
+			return deconnexion(status);
 		} else {
+			//return new ModelAndView("profil", "u", u);
 			modelandview.setViewName("profil");
-			modelandview.addObject("incorrect", "Mot de passe ou utilisateur incorrect");
+			modelandview.addObject("u", utilisateur);
+			modelandview.addObject("incorrect", "Mot de passe incorrect");
 		}
 		
 		return modelandview;
 	}
+	
 
 	@PostMapping("/connexion")
 	private ModelAndView connexion_utilisateur(String username, String password) {
@@ -189,6 +204,12 @@ public class UtilisateurController {
 		}
 
 		return modelandview;
+	}
+	
+	@RequestMapping("/endsession")
+	public String endSessionHandlingMethod(SessionStatus status){
+	        status.setComplete();
+	        return "connexion";
 	}
 
 }
