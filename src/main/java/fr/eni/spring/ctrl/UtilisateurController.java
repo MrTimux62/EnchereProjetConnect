@@ -2,6 +2,8 @@ package fr.eni.spring.ctrl;
 
 import java.util.List;
 
+import org.jasypt.util.password.StrongPasswordEncryptor;
+import org.jasypt.util.text.AES256TextEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,8 @@ public class UtilisateurController {
 	@Autowired
 	private IUtilisateurRepository utilisateurDAO;
 
+	StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
+	
 	@GetMapping("/connexion")
 	private ModelAndView page_connexion() {
 
@@ -90,6 +94,8 @@ public class UtilisateurController {
 	
 	@PostMapping("/inscription")
 	private ModelAndView insert(Utilisateur u) {
+		
+		u.setMotDePasse(passwordEncryptor.encryptPassword(u.getMotDePasse()));
 
 		utilisateurDAO.save(u);
 		
@@ -117,7 +123,7 @@ public class UtilisateurController {
 		modelandview.addObject("incorrect", "Mot de passe ou utilisateur incorrect");
 
 		for (Utilisateur utilisateur : liste_utilisateur) {
-			if (utilisateur.getPseudo().equals(username) && utilisateur.getMotDePasse().equals(password)) {
+			if (utilisateur.getPseudo().equals(username) && passwordEncryptor.checkPassword(password, utilisateur.getMotDePasse())) {
 				modelandview.addObject("session_user", utilisateur.getNoUtilisateur());
 				modelandview.setViewName("liste_enchere");
 				modelandview.addObject("incorrect", "");
