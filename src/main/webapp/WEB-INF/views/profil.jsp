@@ -55,7 +55,8 @@
 				</tbody>
 
 			</table>
-
+			<c:if test="${sessionScope.session_user == u.noUtilisateur}">
+			
 			<a
 				href="${ pageContext.request.contextPath }/ctrl/edit_profil/${sessionScope.session_user}">Editer
 				profil</a> <a
@@ -70,6 +71,9 @@
 					type="submit" value="Supprimer son compte">
 			</form>
 			<p style="color: red">${incorrect}</p>
+			
+			</c:if>
+			
 		</div>
 
 
