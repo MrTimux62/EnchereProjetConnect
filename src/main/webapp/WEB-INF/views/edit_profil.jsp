@@ -9,7 +9,8 @@
 </head>
 <body>
 
-	<c:if test="${sessionScope.session_user == null || sessionScope.session_user == '-1' || sessionScope.session_user != u.noUtilisateur}">
+	<c:if
+		test="${sessionScope.session_user == null || sessionScope.session_user == '-1' || sessionScope.session_user != u.noUtilisateur}">
 		<c:redirect url="/ctrl/list_enchere"></c:redirect>
 	</c:if>
 
@@ -24,15 +25,15 @@
 		<form method="post"
 			action="${ pageContext.request.contextPath }/ctrl/edit_profil/${sessionScope.session_user}">
 
-			<input type="hidden" name="noUtilisateur" value="${sessionScope.session_user}">
-			<input type="text" name="prenom" placeholder="Prénom"
-				value="${ u.prenom }"> <input type="text" name="telephone"
-				placeholder="Téléphone" value="${ u.telephone }"> <input
-				type="text" name="codePostal" placeholder="Code Postal"
-				value="${ u.codePostal }"> <input type="text" name="nom"
-				placeholder="Nom" value="${ u.nom	 }"> <input type="text"
-				name="rue" placeholder="Rue" value="${ u.rue }"> <input
-				type="text" name="ville" placeholder="Ville" value="${ u.ville }">
+			<input type="hidden" name="noUtilisateur"
+				value="${sessionScope.session_user}">
+				 <input type="text" name="prenom" placeholder="Prénom" value="${ u.prenom }"> 
+				<input type="text" name="telephone" placeholder="Téléphone" value="${ u.telephone }"> 
+				<input type="text" name="codePostal" placeholder="Code Postal" value="${ u.codePostal }"> 
+				<input type="email" name="email" placeholder="Email" value="${ u.email }"> 
+				<input type="text" name="nom" placeholder="Nom" value="${ u.nom	 }"> 
+				<input type="text" name="rue" placeholder="Rue" value="${ u.rue }"> 
+				<input type="text" name="ville" placeholder="Ville" value="${ u.ville }">
 			<input type="submit" value="Enregistrée">
 
 		</form>

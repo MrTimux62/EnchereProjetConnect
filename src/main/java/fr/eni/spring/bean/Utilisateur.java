@@ -24,7 +24,7 @@ public class Utilisateur {
 	private String codePostal;
 	private String ville;
 	private String motDePasse;
-	private int credit;
+	private float credit;
 	
 	@OneToMany
 	private List<ArticleVendu> achete;
@@ -121,11 +121,11 @@ public class Utilisateur {
 		this.motDePasse = motDePasse;
 	}
 
-	public int getCredit() {
+	public float getCredit() {
 		return credit;
 	}
 
-	public void setCredit(int credit) {
+	public void setCredit(float credit) {
 		this.credit = credit;
 	}
 

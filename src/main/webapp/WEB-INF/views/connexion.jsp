@@ -15,11 +15,11 @@
 
 <form method="post" action="${ pageContext.request.contextPath }/ctrl/connexion">
 
-	<input type="text" name="username">
-	<input type="password" name="password">
+	<input type="text" name="username" placeholder="Pseudo">
+	<input type="password" name="password" placeholder="Mot de passe">
 	<input type="submit" value="Connexion">
-	 <input type="checkbox" name="souvenir">
-	 <label for="souvenir">Se souvenir de moi</label>
+	  <label for="souvenir"><input type="checkbox" name="souvenir">
+	Se souvenir de moi</label>
 	 <a>Mot de passe oublié</a>
 </form>
 <p style="color: red">

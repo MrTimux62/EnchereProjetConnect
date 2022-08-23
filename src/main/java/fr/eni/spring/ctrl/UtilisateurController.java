@@ -81,7 +81,6 @@ public class UtilisateurController {
 		Utilisateur origin_user = utilisateurDAO.getReferenceById(utilisateur.getNoUtilisateur());
 		
 		utilisateur.setAdministrateur(origin_user.isAdministrateur());
-		utilisateur.setEmail(origin_user.getEmail());
 		utilisateur.setMotDePasse(origin_user.getMotDePasse());
 		utilisateur.setPseudo(origin_user.getPseudo());
 		utilisateur.setCredit(origin_user.getCredit());
