@@ -14,63 +14,64 @@
 	<main>
 
 		<h3>Mes infos</h3>
+		<div id="info-user">
+			<table>
 
-		<table>
+				<tbody>
+					<tr>
+						<td>Pseudo</td>
+						<td><c:if test="${ empty u.pseudo }">Non renseigné</c:if> ${ u.pseudo }</td>
+					</tr>
+					<tr>
+						<td>Nom</td>
+						<td><c:if test="${ empty u.nom }">Non renseigné</c:if> ${ u.nom }</td>
+					</tr>
+					<tr>
+						<td>Prénom</td>
+						<td><c:if test="${ empty u.prenom }">Non renseigné</c:if> ${ u.prenom }</td>
+					</tr>
+					<tr>
+						<td>Email</td>
+						<td><c:if test="${ empty u.email }">Non renseigné</c:if> ${ u.email }</td>
+					</tr>
+					<tr>
+						<td>Téléphone</td>
+						<td><c:if test="${ empty u.telephone }">Non renseigné</c:if>
+							${ u.telephone }</td>
+					</tr>
+					<tr>
+						<td>Rue</td>
+						<td><c:if test="${ empty u.rue }">Non renseigné</c:if> ${ u.rue }</td>
+					</tr>
+					<tr>
+						<td>Code postal</td>
+						<td><c:if test="${ empty u.codePostal }">Non renseigné</c:if>
+							${ u.codePostal }</td>
+					</tr>
+					<tr>
+						<td>Ville</td>
+						<td><c:if test="${ empty u.ville }">Non renseigné</c:if> ${ u.ville }</td>
+					</tr>
+				</tbody>
 
-			<tbody>
-				<tr>
-					<td>Pseudo</td>
-					<td><c:if test="${ empty u.pseudo }">Non renseigné</c:if> ${ u.pseudo }</td>
-				</tr>
-				<tr>
-					<td>Nom</td>
-					<td><c:if test="${ empty u.nom }">Non renseigné</c:if> ${ u.nom }</td>
-				</tr>
-				<tr>
-					<td>Prénom</td>
-					<td><c:if test="${ empty u.prenom }">Non renseigné</c:if> ${ u.prenom }</td>
-				</tr>
-				<tr>
-					<td>Email</td>
-					<td><c:if test="${ empty u.email }">Non renseigné</c:if> ${ u.email }</td>
-				</tr>
-				<tr>
-					<td>Téléphone</td>
-					<td><c:if test="${ empty u.telephone }">Non renseigné</c:if>
-						${ u.telephone }</td>
-				</tr>
-				<tr>
-					<td>Rue</td>
-					<td><c:if test="${ empty u.rue }">Non renseigné</c:if> ${ u.rue }</td>
-				</tr>
-				<tr>
-					<td>Code postal</td>
-					<td><c:if test="${ empty u.codePostal }">Non renseigné</c:if>
-						${ u.codePostal }</td>
-				</tr>
-				<tr>
-					<td>Ville</td>
-					<td><c:if test="${ empty u.ville }">Non renseigné</c:if> ${ u.ville }</td>
-				</tr>
-			</tbody>
+			</table>
 
-		</table>
+			<a
+				href="${ pageContext.request.contextPath }/ctrl/edit_profil/${sessionScope.session_user}">Editer
+				profil</a> <a
+				href="${ pageContext.request.contextPath }/ctrl/deconnecter">Se
+				déconnecter</a>
 
-		<a
-			href="${ pageContext.request.contextPath }/ctrl/edit_profil/${sessionScope.session_user}">Editer
-			profil</a> <a
-			href="${ pageContext.request.contextPath }/ctrl/deconnecter">Se
-			déconnecter</a>
+			<form method="post"
+				action="${ pageContext.request.contextPath }/ctrl/delete">
+				<input type="hidden" name="id" value="${sessionScope.session_user}">
+				<input type="password" name="motdepasse"
+					placeholder="Confirmation mot de passe"> <input
+					type="submit" value="Supprimer son compte">
+			</form>
+			<p style="color: red">${incorrect}</p>
+		</div>
 
-		<form method="post" action="${ pageContext.request.contextPath }/ctrl/delete">
-			<input type="hidden" name="id" value="${sessionScope.session_user}">
-			<input type="password" name="motdepasse" placeholder="Confirmation mot de passe">
-			<input type="submit" value="Supprimer">
-		</form>
-		<p style="color: red">
-			${incorrect}
-		</p>
-		<a href="">Supprimer son compte</a>
 
 
 	</main>

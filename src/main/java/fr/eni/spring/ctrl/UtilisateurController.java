@@ -17,7 +17,7 @@ import fr.eni.spring.bean.Utilisateur;
 import fr.eni.spring.dao.IUtilisateurRepository;
 
 @Controller()
-@SessionAttributes("session_user")
+@SessionAttributes({"session_user", "session_admin"})
 @RequestMapping("")
 public class UtilisateurController {
 
@@ -65,6 +65,20 @@ public class UtilisateurController {
 		Utilisateur utilisateur = utilisateurDAO.getReferenceById(id);
 
 		return new ModelAndView("profil", "u", utilisateur);
+	}
+	
+	@GetMapping("/profil")
+	private ModelAndView page_profil_name(String pseudo) {
+		
+		List<Utilisateur> list_utilisateur = utilisateurDAO.findAll();
+		
+		for (Utilisateur utilisateur : list_utilisateur) {
+			if (utilisateur.getPseudo().equals(pseudo)) {
+				return new ModelAndView("profil", "u", utilisateur);
+			}
+		}
+
+		return new ModelAndView("profil");
 	}
 	
 	@GetMapping("/edit_profil/{id:\\d+}")
@@ -168,6 +182,9 @@ public class UtilisateurController {
 				modelandview.addObject("session_user", utilisateur.getNoUtilisateur());
 				modelandview.setViewName("liste_enchere");
 				modelandview.addObject("incorrect", "");
+				if (utilisateur.isAdministrateur()) {
+					modelandview.addObject("session_admin", utilisateur.getNoUtilisateur());
+				}
 			}
 		}
 

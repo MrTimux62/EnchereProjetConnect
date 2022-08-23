@@ -23,9 +23,12 @@
 			
 				<input type="text" name="" placeholder="Article">
 				<textarea rows="" cols="" name="" placeholder="Description"></textarea>
+				<label>Catégorie :
 				<select>
 					<option></option>
-				</select>
+				</select> 
+				</label>
+				
 				<label>Photo article <input type="file" accept="image/png, image/jpeg"></label>
 				<label>Mise à prix : <input type="number" value="0"> </label>
 				<label>Début de l'enchère : <input type="date"> </label>
