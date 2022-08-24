@@ -59,8 +59,21 @@ public class EnchereController {
 	@GetMapping("/list_enchere")
 	private ModelAndView page_enchere() {
 
-		return new ModelAndView("liste_enchere");
+		return new ModelAndView("liste_enchere", "utilisateurs", utilisateurDAO.findAll());
 	}
+	
+	@GetMapping("/list_enchere/{id:\\d+}")
+	private ModelAndView page_enchere_utilisateur(@PathVariable("id") int id) {
+		
+		ModelAndView modelandview = new ModelAndView();
+		
+		modelandview.setViewName("liste_enchere");
+		modelandview.addObject("utilisateurs", utilisateurDAO.findAll());
+		modelandview.addObject("filter", id);
+
+		return modelandview;
+	}
+
 
 	@GetMapping("/deconnecter")
 	private ModelAndView deconnexion(SessionStatus status) {
@@ -253,6 +266,8 @@ public class EnchereController {
 
 		List<Utilisateur> liste_utilisateur = utilisateurDAO.findAll();
 		ModelAndView modelandview = new ModelAndView();
+		
+		modelandview.addObject("utilisateurs", utilisateurDAO.findAll());
 
 		modelandview.setViewName("connexion");
 		modelandview.addObject("incorrect", "Mot de passe ou utilisateur incorrect");

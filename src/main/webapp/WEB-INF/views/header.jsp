@@ -3,17 +3,10 @@
 
 <header>
 	<h2>ENI-Enchères</h2>
-	<c:if test="${sessionScope.session_user != null}">
-		<span><img alt="accueil"
-			src="${ pageContext.request.contextPath }/resources/accueil.png">
-			<a href="${ pageContext.request.contextPath }/ctrl/list_enchere">Accueil</a>
-		</span>
-	</c:if>
-	<c:if test="${sessionScope.session_user == null}">
-		<span><img alt="accueil"
-			src="${ pageContext.request.contextPath }/resources/accueil.png">
-			<a href="${ pageContext.request.contextPath }">Accueil</a> </span>
-	</c:if>
+	<span><img alt="accueil"
+		src="${ pageContext.request.contextPath }/resources/accueil.png">
+		<a href="${ pageContext.request.contextPath }/ctrl/list_enchere">Accueil</a>
+	</span>
 	<c:if test="${sessionScope.session_user != null}">
 		<span><img alt="vente"
 			src="${ pageContext.request.contextPath }/resources/vente.png">
