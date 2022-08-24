@@ -27,10 +27,6 @@
 			src="${ pageContext.request.contextPath }/resources/accueil.png">
 			<a href="${ pageContext.request.contextPath }">Accueil</a> </span>
 	</c:if>
-	<span><img alt="vente"
-		src="${ pageContext.request.contextPath }/resources/vente.png">
-		<a href="${ pageContext.request.contextPath }/ctrl/nouvelle_vente">Nouvelle
-			Vente</a> </span>
 	<c:if
 		test="${sessionScope.session_user != null && sessionScope.session_user != '-1'}">
 		<span> <img alt="profil"
