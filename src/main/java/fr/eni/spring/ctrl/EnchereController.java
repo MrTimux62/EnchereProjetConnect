@@ -89,7 +89,6 @@ public class EnchereController {
 		//System.out.println(article.toString());
 		List<ArticleVendu> list_article = utilisateur.getVend();
 		list_article.add(article);
-		System.out.println(list_article);
 		utilisateur.setVend(list_article);
 		utilisateurDAO.save(utilisateur);
 		ModelAndView modelandview = new ModelAndView();
