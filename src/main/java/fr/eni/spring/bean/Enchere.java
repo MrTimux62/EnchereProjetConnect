@@ -12,7 +12,7 @@ import javax.persistence.Id;
 public class Enchere {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	private LocalDate dateEnchere;
 	private float montant_enchere;
 	private List<ArticleVendu> concerne;

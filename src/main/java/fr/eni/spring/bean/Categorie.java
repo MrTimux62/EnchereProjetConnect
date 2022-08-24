@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class Categorie {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int noCategorie;
+	private Integer noCategorie;
 	private String libelle;
 	
 	public Categorie() {

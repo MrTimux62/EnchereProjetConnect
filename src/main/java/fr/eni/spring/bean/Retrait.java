@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class Retrait {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	private String rue;
 	private String code_postal;
 	private String ville;

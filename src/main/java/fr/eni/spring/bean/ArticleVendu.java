@@ -14,7 +14,7 @@ public class ArticleVendu {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int noArticle;
+	private Integer noArticle;
 	private String nomArticle;
 	private String description;
 	private LocalDate dateDebutEncheres;

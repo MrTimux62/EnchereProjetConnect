@@ -24,7 +24,7 @@
 
 		<form method="post"
 			action="${ pageContext.request.contextPath }/ctrl/edit_profil/${sessionScope.session_user}">
-
+			<h4>Informations</h4>
 			<input type="hidden" name="noUtilisateur" value="${sessionScope.session_user}">
 				 <input type="text" name="prenom" placeholder="Prénom" value="${ u.prenom }"> 
 				<input type="text" name="telephone" placeholder="Téléphone" value="${ u.telephone }"> 
@@ -33,8 +33,17 @@
 				<input type="text" name="nom" placeholder="Nom" value="${ u.nom	 }"> 
 				<input type="text" name="rue" placeholder="Rue" value="${ u.rue }"> 
 				<input type="text" name="ville" placeholder="Ville" value="${ u.ville }">
-			<input type="submit" value="Enregistrée">
+			<input type="submit" value="Valider">
 
+		</form>
+		
+		<form method="post" action="${ pageContext.request.contextPath }/ctrl/edit_profil_mdp/${sessionScope.session_user}">
+		<h4>Mot de passe</h4>
+			<input type="hidden" name="noUtilisateur" value="${sessionScope.session_user}">
+			<input type="password" placeholder="Ancien mot de passe" name="motDePasse">
+			<input type="password" placeholder="Nouveau mot de passe" name="new_motDePasse">
+			<input type="password" placeholder="Confirmation" name="new_motDePasse2">
+			<input type="submit" value="Valider">
 		</form>
 
 	</main>

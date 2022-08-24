@@ -25,7 +25,9 @@
 				<textarea rows="" cols="" name="" placeholder="Description"></textarea>
 				<label>Catégorie :
 				<select>
-					<option></option>
+					<c:forEach items="${ categories }" var="categorie">
+						<option value="${ categorie.noCategorie }">${ categorie.libelle }</option>
+					</c:forEach>
 				</select> 
 				</label>
 				

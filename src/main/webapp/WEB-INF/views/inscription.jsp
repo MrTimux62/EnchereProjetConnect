@@ -19,11 +19,11 @@
 	<input type="text" name="prenom" placeholder="Prénom">
 	<input type="text" name="telephone" placeholder="Téléphone">
 	<input type="text" name="codePostal" placeholder="Code Postal">
-	<input type="password" name="motDePasse" placeholder="Mot de passe">
 	<input type="text" name="nom" placeholder="Nom">
 	<input type="email" name="email" placeholder="Email">
 	<input type="text" name="rue" placeholder="Rue">
 	<input type="text" name="ville" placeholder="Ville">
+	<input type="password" name="motDePasse" placeholder="Mot de passe">
 	<input type="password" name="motDePasse2" placeholder="Confirmation">
 	<input type="submit" value="Créer">
 </form>

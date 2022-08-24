@@ -71,6 +71,7 @@
 					type="submit" value="Supprimer son compte">
 			</form>
 			<p style="color: red">${incorrect}</p>
+			<p style="color: green">${valid}</p>
 			
 			</c:if>
 			
