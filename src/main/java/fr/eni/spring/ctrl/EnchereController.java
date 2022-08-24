@@ -58,8 +58,12 @@ public class EnchereController {
 
 	@GetMapping("/list_enchere")
 	private ModelAndView page_enchere() {
-
-		return new ModelAndView("liste_enchere", "utilisateurs", utilisateurDAO.findAll());
+		ModelAndView modelandview = new ModelAndView();
+		modelandview.setViewName("liste_enchere");
+		
+		modelandview.addObject("categories", categorieDAO.findAll());
+		modelandview.addObject("utilisateurs", utilisateurDAO.findAll());
+		return modelandview;
 	}
 	
 	@GetMapping("/list_enchere/{id:\\d+}")
@@ -69,6 +73,7 @@ public class EnchereController {
 		
 		modelandview.setViewName("liste_enchere");
 		modelandview.addObject("utilisateurs", utilisateurDAO.findAll());
+		modelandview.addObject("categories", categorieDAO.findAll());
 		modelandview.addObject("filter", id);
 
 		return modelandview;
@@ -105,6 +110,8 @@ public class EnchereController {
 		utilisateur.setVend(list_article);
 		utilisateurDAO.save(utilisateur);
 		ModelAndView modelandview = new ModelAndView();
+		modelandview.addObject("categories", categorieDAO.findAll());
+		modelandview.addObject("utilisateurs", utilisateurDAO.findAll());
 		modelandview.setViewName("liste_enchere");
 		
 		return modelandview;
@@ -268,6 +275,7 @@ public class EnchereController {
 		ModelAndView modelandview = new ModelAndView();
 		
 		modelandview.addObject("utilisateurs", utilisateurDAO.findAll());
+		modelandview.addObject("categories", categorieDAO.findAll());
 
 		modelandview.setViewName("connexion");
 		modelandview.addObject("incorrect", "Mot de passe ou utilisateur incorrect");

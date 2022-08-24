@@ -18,9 +18,12 @@
 
 		<div id="enchere-filtre">
 			<h3>Filtre</h3>
-			<input type="text" placeholder="Rechercher" name="search"> <label
-				for="categorie">Catégorie :<select name="categorie">
+			<input type="text" placeholder="Rechercher" name="search" id="search-vente"> <label
+				for="categorie">Catégorie :<select name="categorie" id="search-categorie">
 					<option value="all" selected>Toutes</option>
+					<c:forEach items="${ categories }" var="categorie">
+						<option value="${ categorie.noCategorie }">${ categorie.libelle }</option>
+					</c:forEach>
 			</select></label> <input type="submit" value="Rechercher">
 			<c:if test="${sessionScope.session_user != null}">
 				<span> <input type="checkbox"
@@ -42,6 +45,7 @@
 
 					<c:forEach items="${ utilisateur.getVend() }" var="vente">
 						<div class="enchere">
+							<input type="hidden" value="${ vente.categorieArticle.noCategorie }" class="categorie-vente">
 							<div class="enchere-img">
 								<img alt="enchere_img"
 									src="${ pageContext.request.contextPath }/resources/default_enchere.png">
