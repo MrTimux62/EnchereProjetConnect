@@ -51,7 +51,7 @@
 									src="${ pageContext.request.contextPath }/resources/default_enchere.png">
 							</div>
 							<div class="enchere-info">
-								<a href="#">${ vente.nomArticle }</a>
+								<a href="${ pageContext.request.contextPath }/ctrl/detail_vente/${ vente.noArticle }">${ vente.nomArticle }</a>
 								<p>Prix : ${ vente.miseAPrix } points</p>
 								<p>Fin de l'enchère : ${ vente.dateFinEncheres }</p>
 								<b>Vendeur : <a href="${ pageContext.request.contextPath }/ctrl/profil/${ utilisateur.noUtilisateur }"> ${ utilisateur.pseudo } </a></b>

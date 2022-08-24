@@ -52,6 +52,10 @@
 						<td>Ville</td>
 						<td><c:if test="${ empty u.ville }">Non renseigné</c:if> ${ u.ville }</td>
 					</tr>
+					<tr>
+						<td>Credits</td>
+						<td><c:if test="${ empty u.credit }">Non renseigné</c:if> ${ u.credit }</td>
+					</tr>
 				</tbody>
 
 			</table>
