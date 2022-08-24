@@ -19,28 +19,33 @@
 			<img alt="new_vente_img" src="${ pageContext.request.contextPath }/resources/default_enchere.png">
 		</div>
 		<div id="new-vente-info">
-			<form action="">
+			<form method="post" action="${ pageContext.request.contextPath }/ctrl/nouvelle_vente/${sessionScope.session_user}">
 			
-				<input type="text" name="" placeholder="Article">
-				<textarea rows="" cols="" name="" placeholder="Description"></textarea>
+				<input type="text" name="nomArticle" placeholder="Article">
+				<textarea rows="" cols="" name="description" placeholder="Description"></textarea>
 				<label>Catégorie :
-				<select>
+				<select name="categorieArticle.noCategorie">
 					<c:forEach items="${ categories }" var="categorie">
 						<option value="${ categorie.noCategorie }">${ categorie.libelle }</option>
 					</c:forEach>
 				</select> 
 				</label>
 				
-				<label>Photo article <input type="file" accept="image/png, image/jpeg"></label>
-				<label>Mise à prix : <input type="number" value="0"> </label>
-				<label>Début de l'enchère : <input type="date"> </label>
-				<label>Fin de l'enchère : <input type="date"> </label>
+				<!--<label>Photo article <input type="file" accept="image/png, image/jpeg" name="imgArticle"></label>-->
+				<label>Mise à prix : <input type="number" value="0" name="miseAPrix"> </label>
+				
+				<label>Début de l'enchère : <input type="date" name="dateDebutEncheres"> </label>
+				<label>Fin de l'enchère : <input type="date" name="dateFinEncheres"> </label>
+				<!--
 				<div id="new-vente-retrait">
 					<b>Retrait</b>
-					<input type="text" placeholder="Rue" value="${ u.rue }">
-					<input type="text" placeholder="Code Postal" value="${ u.codePostal }">
-					<input type="text" placeholder="Ville" value="${ u.ville }">
+					<input type="text" placeholder="Rue" value="${ u.rue }" name="lieuRetrait.rue">
+					<input type="text" placeholder="Code Postal" value="${ u.codePostal }" name="lieuRetrait.code_postal">
+					<input type="text" placeholder="Ville" value="${ u.ville }" name="lieuRetrait.ville">
 				</div>
+				-->
+				<input type="hidden" name="prixVente" value="0">
+				<input type="hidden" name="etatVente" value="En Vente">
 			
 				<input type="submit" value="Enregister">
 			

@@ -16,7 +16,7 @@
 	</c:if>
 	<span><img alt="vente"
 		src="${ pageContext.request.contextPath }/resources/vente.png">
-		<a href="${ pageContext.request.contextPath }/ctrl/nouvelle_vente">Nouvelle
+		<a href="${ pageContext.request.contextPath }/ctrl/nouvelle_vente/${sessionScope.session_user}">Nouvelle
 			Vente</a> </span>
 	<c:if
 		test="${sessionScope.session_user != null}">

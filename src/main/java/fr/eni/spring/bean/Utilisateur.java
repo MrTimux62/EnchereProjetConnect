@@ -26,8 +26,8 @@ public class Utilisateur {
 	private String motDePasse;
 	private float credit;
 	
-	@OneToMany
-	private List<ArticleVendu> achete;
+	//@OneToMany
+	//private List<ArticleVendu> achete;
 	
 	@OneToMany
 	private List<ArticleVendu> vend;
@@ -145,13 +145,14 @@ public class Utilisateur {
 		this.disabled = disabled;
 	}
 
+	/*
 	public List<ArticleVendu> getAchete() {
 		return achete;
 	}
 
 	public void setAchete(List<ArticleVendu> achete) {
 		this.achete = achete;
-	}
+	}*/
 
 	public List<ArticleVendu> getVend() {
 		return vend;

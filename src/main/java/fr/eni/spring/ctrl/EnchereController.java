@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import fr.eni.spring.bean.ArticleVendu;
 import fr.eni.spring.bean.Utilisateur;
 import fr.eni.spring.dao.IArticleVenduRepository;
 import fr.eni.spring.dao.ICategorieRepository;
@@ -24,7 +25,7 @@ import fr.eni.spring.dao.IUtilisateurRepository;
 @Controller()
 @SessionAttributes({ "session_user", "session_admin" })
 @RequestMapping("")
-public class UtilisateurController {
+public class EnchereController {
 
 	@Autowired
 	private IUtilisateurRepository utilisateurDAO;
@@ -67,10 +68,34 @@ public class UtilisateurController {
 		return new ModelAndView("connexion");
 	}
 
-	@GetMapping("/nouvelle_vente")
-	private ModelAndView nouvelle_vente() {
+	@GetMapping("/nouvelle_vente/{id:\\d+}")
+	private ModelAndView nouvelle_vente(@PathVariable("id") int id) {
 		
-		return new ModelAndView("nouvelle_vente", "categories", categorieDAO.findAll());
+		Utilisateur utilisateur = utilisateurDAO.getReferenceById(id);
+		
+		ModelAndView modelandview = new ModelAndView();
+		modelandview.setViewName("nouvelle_vente");
+		modelandview.addObject("categories", categorieDAO.findAll());
+		modelandview.addObject("u", utilisateur);
+		
+		return modelandview;
+	}
+	
+	@PostMapping("/nouvelle_vente/{id:\\d+}")
+	private ModelAndView nouvelle_vente_confirm(@PathVariable("id") int id, ArticleVendu article) {
+		
+		Utilisateur utilisateur = utilisateurDAO.getReferenceById(id);
+		//articleVenduDAO.save(article);
+		//System.out.println(article.toString());
+		List<ArticleVendu> list_article = utilisateur.getVend();
+		list_article.add(article);
+		System.out.println(list_article);
+		utilisateur.setVend(list_article);
+		utilisateurDAO.save(utilisateur);
+		ModelAndView modelandview = new ModelAndView();
+		modelandview.setViewName("liste_enchere");
+		
+		return modelandview;
 	}
 
 	@GetMapping("/profil/{id:\\d+}")

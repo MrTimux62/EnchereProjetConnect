@@ -9,16 +9,20 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import org.springframework.web.multipart.MultipartFile;
+
 @Entity
 public class ArticleVendu {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer noArticle;
+	
 	private String nomArticle;
 	private String description;
 	private LocalDate dateDebutEncheres;
 	private LocalDate dateFinEncheres;
+	private MultipartFile imgArticle;
 	private float miseAPrix;
 	private float prixVente;
 	private String etatVente;
@@ -90,6 +94,14 @@ public class ArticleVendu {
 	}
 	public void setCategorieArticle(Categorie categorieArticle) {
 		this.categorieArticle = categorieArticle;
+	}
+
+	public MultipartFile getImgArticle() {
+		return imgArticle;
+	}
+
+	public void setImgArticle(MultipartFile imgArticle) {
+		this.imgArticle = imgArticle;
 	}
 	
 }
