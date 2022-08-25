@@ -5,7 +5,6 @@ import java.util.List;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import fr.eni.spring.bean.ArticleVendu;
+import fr.eni.spring.bean.Enchere;
 import fr.eni.spring.bean.Utilisateur;
 import fr.eni.spring.dao.IArticleVenduRepository;
 import fr.eni.spring.dao.ICategorieRepository;
@@ -75,6 +75,32 @@ public class EnchereController {
 		modelandview.addObject("utilisateurs", utilisateurDAO.findAll());
 		modelandview.addObject("categories", categorieDAO.findAll());
 		modelandview.addObject("filter", id);
+
+		return modelandview;
+	}
+	
+	@GetMapping("/detail_vente/{id:\\d+}")
+	private ModelAndView page_detail_vente(@PathVariable("id") int id) {
+		
+		ModelAndView modelandview = new ModelAndView();
+		
+		modelandview.setViewName("detail_vente");
+		modelandview.addObject("vente", articleVenduDAO.getReferenceById(id));
+		
+		List<Utilisateur> list_utilisateur = utilisateurDAO.findAll();
+		
+		for (Utilisateur utilisateur : list_utilisateur) {
+			for (Enchere enchere : utilisateur.getEncherit()) {
+				if (enchere.getConcerne().getNoArticle() == id) {
+					modelandview.addObject("enchere_user", utilisateur.getPseudo());
+				}
+			}
+			for (ArticleVendu vente : utilisateur.getVend()) {
+				if (vente.getNoArticle() == id) {
+					modelandview.addObject("u", utilisateur);
+				}
+			}
+		}
 
 		return modelandview;
 	}

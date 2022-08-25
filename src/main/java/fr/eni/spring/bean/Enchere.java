@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Enchere {
@@ -15,7 +16,9 @@ public class Enchere {
 	private Integer id;
 	private LocalDate dateEnchere;
 	private float montant_enchere;
-	private List<ArticleVendu> concerne;
+	
+	@ManyToOne
+	private ArticleVendu concerne;
 	
 	public Enchere() {
 		
@@ -39,10 +42,10 @@ public class Enchere {
 	public void setMontant_enchere(float montant_enchere) {
 		this.montant_enchere = montant_enchere;
 	}
-	public List<ArticleVendu> getConcerne() {
+	public ArticleVendu getConcerne() {
 		return concerne;
 	}
-	public void setConcerne(List<ArticleVendu> concerne) {
+	public void setConcerne(ArticleVendu concerne) {
 		this.concerne = concerne;
 	}
 }
