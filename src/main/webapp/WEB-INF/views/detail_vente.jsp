@@ -21,23 +21,38 @@
 					src="${ pageContext.request.contextPath }/resources/default_enchere.png">
 			</div>
 			<div id="new-vente-info">
-				
+
 				<h4>${ vente.nomArticle }</h4>
-				
-				<p> Description : <br> ${vente.description }</p>
-				
+
+				<p>
+					Description : <br> ${vente.description }
+				</p>
+
 				<p>Catégorie ${ vente.categorieArticle.libelle }</p>
-				<p>Meilleure offre: <c:if test="${ vente.prixVente != 0 }"> ${ vente.prixVente } par ${ enchere_user } </c:if> <c:if test="${ vente.prixVente == 0 }">Aucune</c:if> </p>
-				<p>Mise à prix: ${ vente.miseAPrix } </p>
+				<p>
+					Meilleure offre:
+					<c:if test="${ vente.prixVente != 0 }"> ${ vente.prixVente } par ${ enchere_user } </c:if>
+					<c:if test="${ vente.prixVente == 0 }">Aucune</c:if>
+				</p>
+				<p>Mise à prix: ${ vente.miseAPrix }</p>
 				<p>Fin de l'enchère: ${ vente.dateFinEncheres }</p>
-				<p>Retrait: ${ vente.lieuRetrait.rue } <br>  ${ vente.lieuRetrait.code_postal } ${ vente.lieuRetrait.ville }</p>
+				<p>
+					Retrait: ${ vente.lieuRetrait.rue } <br> ${ vente.lieuRetrait.code_postal }
+					${ vente.lieuRetrait.ville }
+				</p>
 				<p>Vendeur: ${ u.pseudo }</p>
-				<form action="">
-					<p>Ma proposition: <input type="number" name="prixVente" value=""> <input type="submit" value="Enchérir"> </p>
+				<form method="post"
+					action="${ pageContext.request.contextPath }/ctrl/enchere/${sessionScope.session_user}">
+					<input type="hidden" name="id_article" value="${ vente.noArticle }">
+					<p>
+						Ma proposition: <input type="number" name="prixVente" value="">
+						<input type="submit" value="Enchérir">
+					</p>
+					<p style="color: red">${incorrect}</p>
 				</form>
-				
-				
-				
+
+
+
 			</div>
 		</div>
 

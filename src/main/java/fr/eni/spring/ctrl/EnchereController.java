@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import fr.eni.spring.bean.ArticleVendu;
@@ -29,16 +30,16 @@ public class EnchereController {
 
 	@Autowired
 	private IUtilisateurRepository utilisateurDAO;
-	
+
 	@Autowired
 	private ICategorieRepository categorieDAO;
-	
+
 	@Autowired
 	private IArticleVenduRepository articleVenduDAO;
-	
+
 	@Autowired
 	private IRetraitRepository retraitDAO;
-	
+
 	@Autowired
 	private IEnchereRepository enchereDAO;
 
@@ -60,17 +61,17 @@ public class EnchereController {
 	private ModelAndView page_enchere() {
 		ModelAndView modelandview = new ModelAndView();
 		modelandview.setViewName("liste_enchere");
-		
+
 		modelandview.addObject("categories", categorieDAO.findAll());
 		modelandview.addObject("utilisateurs", utilisateurDAO.findAll());
 		return modelandview;
 	}
-	
+
 	@GetMapping("/list_enchere/{id:\\d+}")
 	private ModelAndView page_enchere_utilisateur(@PathVariable("id") int id) {
-		
+
 		ModelAndView modelandview = new ModelAndView();
-		
+
 		modelandview.setViewName("liste_enchere");
 		modelandview.addObject("utilisateurs", utilisateurDAO.findAll());
 		modelandview.addObject("categories", categorieDAO.findAll());
@@ -78,17 +79,17 @@ public class EnchereController {
 
 		return modelandview;
 	}
-	
+
 	@GetMapping("/detail_vente/{id:\\d+}")
 	private ModelAndView page_detail_vente(@PathVariable("id") int id) {
-		
+
 		ModelAndView modelandview = new ModelAndView();
-		
+
 		modelandview.setViewName("detail_vente");
 		modelandview.addObject("vente", articleVenduDAO.getReferenceById(id));
-		
+
 		List<Utilisateur> list_utilisateur = utilisateurDAO.findAll();
-		
+
 		for (Utilisateur utilisateur : list_utilisateur) {
 			for (Enchere enchere : utilisateur.getEncherit()) {
 				if (enchere.getConcerne().getNoArticle() == id) {
@@ -105,6 +106,48 @@ public class EnchereController {
 		return modelandview;
 	}
 
+	@PostMapping("/enchere/{id:\\d+}")
+	private ModelAndView enchere(@PathVariable("id") int id, float prixVente, Integer id_article) {
+
+		ModelAndView modelandview = new ModelAndView();
+
+		ArticleVendu article = articleVenduDAO.getReferenceById(id_article);
+
+		Utilisateur enchere_user = utilisateurDAO.getReferenceById(id);
+
+		if (prixVente > article.getMiseAPrix() && prixVente > article.getPrixVente()) {
+			article.setPrixVente(prixVente);
+			articleVenduDAO.save(article);
+			Enchere enchere = new Enchere();
+			enchere.setConcerne(article);
+			List<Enchere> list_enchere = enchere_user.getEncherit();
+			list_enchere.add(enchere);
+			enchere_user.setEncherit(list_enchere);
+			utilisateurDAO.save(enchere_user);
+		} else {
+			modelandview.addObject("incorrect", "Prix enchère incorrect");
+		}
+
+		modelandview.setViewName("detail_vente");
+		modelandview.addObject("vente", articleVenduDAO.getReferenceById(id_article));
+
+		List<Utilisateur> list_utilisateur = utilisateurDAO.findAll();
+
+		for (Utilisateur utilisateur : list_utilisateur) {
+			for (Enchere enchere : utilisateur.getEncherit()) {
+				if (enchere.getConcerne().getNoArticle() == id_article) {
+					modelandview.addObject("enchere_user", utilisateur.getPseudo());
+				}
+			}
+			for (ArticleVendu vente : utilisateur.getVend()) {
+				if (vente.getNoArticle() == id_article) {
+					modelandview.addObject("u", utilisateur);
+				}
+			}
+		}
+
+		return modelandview;
+	}
 
 	@GetMapping("/deconnecter")
 	private ModelAndView deconnexion(SessionStatus status) {
@@ -114,23 +157,22 @@ public class EnchereController {
 
 	@GetMapping("/nouvelle_vente/{id:\\d+}")
 	private ModelAndView nouvelle_vente(@PathVariable("id") int id) {
-		
+
 		Utilisateur utilisateur = utilisateurDAO.getReferenceById(id);
-		
+
 		ModelAndView modelandview = new ModelAndView();
 		modelandview.setViewName("nouvelle_vente");
 		modelandview.addObject("categories", categorieDAO.findAll());
 		modelandview.addObject("u", utilisateur);
-		
+
 		return modelandview;
 	}
-	
+
 	@PostMapping("/nouvelle_vente/{id:\\d+}")
 	private ModelAndView nouvelle_vente_confirm(@PathVariable("id") int id, ArticleVendu article) {
 		
 		Utilisateur utilisateur = utilisateurDAO.getReferenceById(id);
-		//articleVenduDAO.save(article);
-		//System.out.println(article.toString());
+		
 		List<ArticleVendu> list_article = utilisateur.getVend();
 		list_article.add(article);
 		utilisateur.setVend(list_article);
@@ -299,7 +341,7 @@ public class EnchereController {
 
 		List<Utilisateur> liste_utilisateur = utilisateurDAO.findAll();
 		ModelAndView modelandview = new ModelAndView();
-		
+
 		modelandview.addObject("utilisateurs", utilisateurDAO.findAll());
 		modelandview.addObject("categories", categorieDAO.findAll());
 

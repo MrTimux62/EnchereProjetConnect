@@ -13,21 +13,25 @@
 		http://www.springframework.org/schema/tx
 		http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
-	<jpa:repositories base-package="fr.eni.spring.dao" entity-manager-factory-ref="emf" />
+	<jpa:repositories base-package="fr.eni.spring.dao"
+		entity-manager-factory-ref="emf" />
 
 	<context:annotation-config />
 	<context:component-scan base-package="fr.eni" />
 
-	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" >
-		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName"
+			value="com.mysql.cj.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql:///enchere" />
 		<property name="username" value="root" />
 		<property name="password" value="" />
 	</bean>
 
-	<bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" >
+	<bean id="emf"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 
-		<property name="packagesToScan" >
+		<property name="packagesToScan">
 			<list>
 				<value>fr.eni.spring.bean</value>
 			</list>
@@ -35,13 +39,14 @@
 
 		<property name="dataSource" ref="dataSource" />
 
-		<property name="jpaVendorAdapter" >
-			<bean class="org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter" >
-<!-- 				<property name="database" value="MYSQL" /> -->
+		<property name="jpaVendorAdapter">
+			<bean
+				class="org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter">
+				<!-- <property name="database" value="MYSQL" /> -->
 			</bean>
 		</property>
 
-		<property name="jpaPropertyMap" >
+		<property name="jpaPropertyMap">
 			<map>
 				<entry key="eclipselink.weaving" value="false" />
 			</map>
@@ -49,14 +54,18 @@
 
 	</bean>
 
-	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager" >
+	<bean id="transactionManager"
+		class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="emf" />
 	</bean>
 
-	<tx:annotation-driven transaction-manager="transactionManager" />
+	<tx:annotation-driven
+		transaction-manager="transactionManager" />
 
-	<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver" >
-		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
 		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />
 	</bean>

@@ -19,7 +19,7 @@
 			<img alt="new_vente_img" src="${ pageContext.request.contextPath }/resources/default_enchere.png">
 		</div>
 		<div id="new-vente-info">
-			<form method="post" action="${ pageContext.request.contextPath }/ctrl/nouvelle_vente/${sessionScope.session_user}" >
+			<form method="post" action="${ pageContext.request.contextPath }/ctrl/nouvelle_vente/${sessionScope.session_user}">
 			
 				<input type="text" name="nomArticle" placeholder="Article">
 				<textarea rows="" cols="" name="description" placeholder="Description"></textarea>
