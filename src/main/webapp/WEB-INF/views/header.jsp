@@ -1,34 +1,39 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<jsp:include page="bootstrap_fragment.jsp" />
+  <style><%@include file="/css/main.css"%></style>
+
 <header>
-	<h2>ENI-Enchères</h2>
-	<span><img alt="accueil"
+
+
+	<a href="${ pageContext.request.contextPath }/ctrl/list_enchere"><h2>ENI-Enchères <i class="fa-solid fa-euro-sign"></i></h2></a>
+	<a href="${ pageContext.request.contextPath }/ctrl/list_enchere"><span><img alt="accueil"
 		src="${ pageContext.request.contextPath }/resources/accueil.png">
-		<a href="${ pageContext.request.contextPath }/ctrl/list_enchere">Accueil</a>
-	</span>
+		<i>Accueil</i>
+	</span></a>
 	<c:if test="${sessionScope.session_user != null}">
-		<span><img alt="vente"
+		<a
+			href="${ pageContext.request.contextPath }/ctrl/nouvelle_vente/${sessionScope.session_user}"><span><img alt="vente"
 			src="${ pageContext.request.contextPath }/resources/vente.png">
-			<a
-			href="${ pageContext.request.contextPath }/ctrl/nouvelle_vente/${sessionScope.session_user}">Nouvelle
-				Vente</a> </span>
+			<i>Nouvelle
+				Vente </i></span></a>
 	</c:if>
 	<c:if test="${sessionScope.session_user != null}">
-		<span> <img alt="profil"
+		<a
+			href="${ pageContext.request.contextPath }/ctrl/profil/${sessionScope.session_user}"><span> <img alt="profil"
 			src="${ pageContext.request.contextPath }/resources/utilisateur.png">
-			<a
-			href="${ pageContext.request.contextPath }/ctrl/profil/${sessionScope.session_user}">Mon
-				profil</a></span>
+			<i>Mon
+				profil</i></span></a>
 	</c:if>
 	<c:if test="${sessionScope.session_user == null}">
-		<span> <img alt="connexion/inscription"
+		<a href="${ pageContext.request.contextPath }/ctrl/connexion"><span> <img alt="connexion/inscription"
 			src="${ pageContext.request.contextPath }/resources/connexion.png">
-			<a href="${ pageContext.request.contextPath }/ctrl/connexion">Connexion/Inscription</a></span>
+			<i>Connexion/Inscription</i></span></a>
 	</c:if>
 	<c:if test="${sessionScope.session_admin != null}">
-		<span> <img alt="admin"
+		<a href="${ pageContext.request.contextPath }/ctrl/admin"><span> <img alt="admin"
 			src="${ pageContext.request.contextPath }/resources/admin.png">
-			<a href="${ pageContext.request.contextPath }/ctrl/admin">Admin</a></span>
+			<i>Admin</i></span></a>
 	</c:if>
 </header>

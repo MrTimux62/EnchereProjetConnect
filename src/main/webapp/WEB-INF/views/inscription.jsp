@@ -14,7 +14,6 @@
 <h1>Inscription</h1>
 
 <form method="post" action="${ pageContext.request.contextPath }/ctrl/inscription">
-
 	<input type="text" name="pseudo" placeholder="Pseudo">
 	<input type="text" name="prenom" placeholder="Prénom">
 	<input type="text" name="telephone" placeholder="Téléphone">
@@ -40,4 +39,5 @@ ${incorrect}
 
 <script type="text/javascript" src="${ pageContext.request.contextPath }/js/main.js"></script>
 </body>
+<jsp:include page="footer.jsp"></jsp:include>
 </html>

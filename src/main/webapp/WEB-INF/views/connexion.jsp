@@ -35,4 +35,5 @@ ${incorrect}
 
 <script type="text/javascript" src="${ pageContext.request.contextPath }/js/main.js"></script>
 </body>
+<jsp:include page="footer.jsp"></jsp:include>
 </html>

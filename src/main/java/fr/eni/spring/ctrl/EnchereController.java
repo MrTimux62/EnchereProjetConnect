@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import fr.eni.spring.bean.ArticleVendu;
@@ -19,8 +18,6 @@ import fr.eni.spring.bean.Enchere;
 import fr.eni.spring.bean.Utilisateur;
 import fr.eni.spring.dao.IArticleVenduRepository;
 import fr.eni.spring.dao.ICategorieRepository;
-import fr.eni.spring.dao.IEnchereRepository;
-import fr.eni.spring.dao.IRetraitRepository;
 import fr.eni.spring.dao.IUtilisateurRepository;
 
 @Controller()
@@ -36,12 +33,6 @@ public class EnchereController {
 
 	@Autowired
 	private IArticleVenduRepository articleVenduDAO;
-
-	@Autowired
-	private IRetraitRepository retraitDAO;
-
-	@Autowired
-	private IEnchereRepository enchereDAO;
 
 	StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
 
@@ -120,6 +111,8 @@ public class EnchereController {
 			articleVenduDAO.save(article);
 			Enchere enchere = new Enchere();
 			enchere.setConcerne(article);
+			enchere.setMontant_enchere(prixVente);
+			enchere.setDateEnchere(article.getDateDebutEncheres());
 			List<Enchere> list_enchere = enchere_user.getEncherit();
 			list_enchere.add(enchere);
 			enchere_user.setEncherit(list_enchere);
@@ -236,6 +229,8 @@ public class EnchereController {
 		utilisateur.setPseudo(origin_user.getPseudo());
 		utilisateur.setCredit(origin_user.getCredit());
 		utilisateur.setDisabled(origin_user.isDisabled());
+		utilisateur.setVend(origin_user.getVend());
+		utilisateur.setEncherit(origin_user.getEncherit());
 
 		utilisateurDAO.save(utilisateur);
 
@@ -315,6 +310,9 @@ public class EnchereController {
 
 		}
 
+		modelandview.addObject("categories", categorieDAO.findAll());
+		modelandview.addObject("utilisateurs", utilisateurDAO.findAll());
+		
 		return modelandview;
 	}
 

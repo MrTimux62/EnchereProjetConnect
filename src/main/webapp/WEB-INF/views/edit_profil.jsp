@@ -6,6 +6,8 @@
 <title>Enchère Projet</title>
 <link rel="stylesheet" type="text/css"
 	href="${ pageContext.request.contextPath }/css/main.css">
+	<jsp:include page="bootstrap_fragment.jsp" />
+  <style><%@include file="/css/main.css"%></style>
 </head>
 <body>
 
@@ -18,9 +20,9 @@
 
 	<main>
 
-		<h3>Mes infos</h3>
+		<div class="text text center m-4"> Mes informations</div>
 
-		<h4>Mon pseudo : ${ u.pseudo }</h4>
+		<h5>Mon pseudo : ${ u.pseudo }</h5>
 
 		<form method="post"
 			action="${ pageContext.request.contextPath }/ctrl/edit_profil/${sessionScope.session_user}">
@@ -51,4 +53,5 @@
 	<script type="text/javascript"
 		src="${ pageContext.request.contextPath }/js/main.js"></script>
 </body>
+<jsp:include page="footer.jsp"></jsp:include>
 </html>

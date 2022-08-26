@@ -1,8 +1,12 @@
 <!DOCTYPE html>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
+<jsp:include page="bootstrap_fragment.jsp" />
+  <style><%@include file="/css/main.css"%></style>
+  
+  
 <title>Enchère Projet</title>
 <link rel="stylesheet" type="text/css"
 	href="${ pageContext.request.contextPath }/css/main.css">
@@ -17,14 +21,16 @@
 
 
 		<div id="enchere-filtre">
+		<span>
 			<h3>Filtre</h3>
-			<input type="text" placeholder="Rechercher" name="search" id="search-vente"> <label
+			<input type="text" placeholder="Rechercher" name="search" id="search-vente"></span>
+			 <label
 				for="categorie">Catégorie :<select name="categorie" id="search-categorie">
 					<option value="all" selected>Toutes</option>
 					<c:forEach items="${ categories }" var="categorie">
 						<option value="${ categorie.noCategorie }">${ categorie.libelle }</option>
 					</c:forEach>
-			</select></label> <input type="submit" value="Rechercher">
+			</select></label>
 			<c:if test="${sessionScope.session_user != null}">
 				<span> <input type="checkbox"
 					<c:if test="${ filter == null }">checked</c:if>
@@ -37,6 +43,7 @@
 			</c:if>
 
 		</div>
+<div class= "display-flex ">
 
 		<div id="list-enchere">
 
@@ -54,7 +61,7 @@
 								<a href="${ pageContext.request.contextPath }/ctrl/detail_vente/${ vente.noArticle }">${ vente.nomArticle }</a>
 								<p>Prix : ${ vente.miseAPrix } points</p>
 								<p>Fin de l'enchère : ${ vente.dateFinEncheres }</p>
-								<b>Vendeur : <a href="${ pageContext.request.contextPath }/ctrl/profil/${ utilisateur.noUtilisateur }"> ${ utilisateur.pseudo } </a></b>
+								<p>Vendeur : <a href="${ pageContext.request.contextPath }/ctrl/profil/${ utilisateur.noUtilisateur }"> ${ utilisateur.pseudo } </a></p>
 							</div>
 						</div>
 					</c:forEach>
@@ -83,13 +90,13 @@
 				</c:forEach>
 			</c:if>
 
-
+</div>
 		</div>
-
 	</main>
 
 
 	<script type="text/javascript"
 		src="${ pageContext.request.contextPath }/js/main.js"></script>
 </body>
+<jsp:include page="footer.jsp"></jsp:include>
 </html>

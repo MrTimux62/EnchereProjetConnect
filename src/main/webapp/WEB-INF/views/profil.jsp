@@ -6,6 +6,8 @@
 <title>Enchère Projet</title>
 <link rel="stylesheet" type="text/css"
 	href="${ pageContext.request.contextPath }/css/main.css">
+	<link rel="stylesheet" type="text/css"
+	href="${ pageContext.request.contextPath }/css/profil.css">
 </head>
 <body>
 
@@ -13,52 +15,50 @@
 
 	<main>
 
-		<h3>Mes infos</h3>
+		<h3 class="text text-center"> Mes Informations</h3>
 		<div id="info-user">
+			<div class="container m-4">
 			<table>
 
 				<tbody>
 					<tr>
-						<td>Pseudo</td>
+						<td>Pseudo :</td>
 						<td><c:if test="${ empty u.pseudo }">Non renseigné</c:if> ${ u.pseudo }</td>
 					</tr>
 					<tr>
-						<td>Nom</td>
+						<td>Nom :</td>
 						<td><c:if test="${ empty u.nom }">Non renseigné</c:if> ${ u.nom }</td>
 					</tr>
 					<tr>
-						<td>Prénom</td>
+						<td>Prénom :</td>
 						<td><c:if test="${ empty u.prenom }">Non renseigné</c:if> ${ u.prenom }</td>
 					</tr>
 					<tr>
-						<td>Email</td>
+						<td><i class="fa-solid fa-at"></i> Email :</td>
 						<td><c:if test="${ empty u.email }">Non renseigné</c:if> ${ u.email }</td>
 					</tr>
 					<tr>
-						<td>Téléphone</td>
+						<td><i class="fa-solid fa-phone"></i> Téléphone : </td>
 						<td><c:if test="${ empty u.telephone }">Non renseigné</c:if>
 							${ u.telephone }</td>
 					</tr>
 					<tr>
-						<td>Rue</td>
+						<td>Rue :</td>
 						<td><c:if test="${ empty u.rue }">Non renseigné</c:if> ${ u.rue }</td>
 					</tr>
 					<tr>
-						<td>Code postal</td>
+						<td>Code postal :</td>
 						<td><c:if test="${ empty u.codePostal }">Non renseigné</c:if>
 							${ u.codePostal }</td>
 					</tr>
 					<tr>
-						<td>Ville</td>
+						<td>Ville :</td>
 						<td><c:if test="${ empty u.ville }">Non renseigné</c:if> ${ u.ville }</td>
-					</tr>
-					<tr>
-						<td>Credits</td>
-						<td><c:if test="${ empty u.credit }">Non renseigné</c:if> ${ u.credit }</td>
 					</tr>
 				</tbody>
 
 			</table>
+			</div>
 			<c:if test="${sessionScope.session_user == u.noUtilisateur}">
 			
 			<a
